@@ -1,0 +1,65 @@
+
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand text-white">JWT Auth System</a>
+        <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+      </nav>
+      <div class="form-group">
+          <label>Nombre</label>
+          <input name="Nombre" #Apellidos="ngModel" [(ngModel)]="service.formData.Nombre" class="form-control" required>
+          <div class="validation-error" *ngIf="Nombre.invalid && Nombre.touched">This field is required.</div>
+        </div> 
+  <div class="form-group">
+    <label>Apellidos</label>
+    <input name="Apellidos" #Apellidos="ngModel" [(ngModel)]="service.formData.Apellidos" class="form-control" required>
+    <div class="validation-error" *ngIf="Apellidos.invalid && Apellidos.touched">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <label>Presio Inicial</label>
+    <input name="Precio Inicial" #PreIni="ngModel" [(ngModel)]="service.formData.PreIni" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Presio Ofertado</label>
+    <input name="Precio ofertado" #PreOfre="ngModel" [(ngModel)]="service.formData.PreOfre" class="form-control">
+  </div>
+  <input type="file" name="Imagen" #Imagen="ngModel" [(ngModel)]="service.formData.Imagen" class="form-control" />
+  <!-- <image-upload name="Imagen" #Imagen="ngModel" [(ngModel)]="service.formData.Imagen" class="form-control" (uploadFinished)="onUploadFinish($Imagen)"> 
+  </image-upload> -->
+  <div class="form-group">
+    <label>Descripcion</label>
+    <input name="Descripcion" #Descripcion="ngModel" [(ngModel)]="service.formData.Descripcion" class="form-control" required>
+    <div class="validation-error" *ngIf="Descripcion.invalid && Descripcion.touched">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <label>Estado</label>
+    <input name="Estado" #Estado="ngModel" [(ngModel)]="service.formData.Estado" class="form-control" required>
+    <div class="validation-error" *ngIf="Estado.invalid && Estado.touched">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <label>Usuario</label>
+    <input name="IdUsuario" #IdUsuario="ngModel" [(ngModel)]="service.formData.IdUsuario" class="form-control" required>
+    <div class="validation-error" *ngIf="IdUsuario.invalid && IdUsuario.touched">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">SUBMIT</button>
+  </div>
+
+  <table class="table table-hover">
+    <tr *ngFor="let emp of service.list">
+      <td (click)="populateForm(emp)">[{{emp.Nombre}}]-{{emp.PreIni}}</td>
+      <td (click)="populateForm(emp)">{{emp.PreOfre}}</td>
+      <td (click)="populateForm(emp)">{{emp.Imagen}}</td>
+      <td (click)="populateForm(emp)">{{emp.Descripcion}}</td>
+      <td (click)="populateForm(emp)">{{emp.Estado}}</td>
+      <td (click)="populateForm(emp)">{{emp.IdUsuario}}</td>
+    </tr>
+  </table>
+  <div class="card m-5" style="width:18rem" *ngIf="userDetails">
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Nombre : </strong>{{userDetails.Nombre}}</li>
+      <li class="list-group-item"><strong>Apellidos : </strong>{{userDetails.Apellidos}}</li>
+      <li class="list-group-item"><strong>Email : </strong>{{userDetails.Email}}</li>
+    </ul>
+  </div>
+
+</form>
